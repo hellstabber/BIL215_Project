@@ -73,5 +73,20 @@ namespace BIL215_Project
 
             MessageBox.Show("Ürün başarıyla silindi.");
         }
+
+        private void btnUrunleriYenile_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Server=LAPTOP\\SQLEXPRESS;Database=BIL215_Proje;Trusted_Connection=True;";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM MenuItems"; 
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
+                DataTable dataTable = new DataTable();
+                dataAdapter.Fill(dataTable);
+                dataGridView1.DataSource = dataTable;
+                //dataGridView.DataSource = dataTable;
+            }
+        }
     }
 }

@@ -46,11 +46,16 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.menuItemsTableAdapter = new BIL215_Project.BIL215_ProjeDataSetTableAdapters.MenuItemsTableAdapter();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnUrunleriYenile = new System.Windows.Forms.Button();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuItemsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bIL215_ProjeDataSet)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -66,6 +71,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnUrunleriYenile);
+            this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.btnUrunSil);
             this.tabPage1.Controls.Add(this.txUrunSil);
             this.tabPage1.Controls.Add(this.txUrunFiyati);
@@ -84,7 +91,7 @@
             // 
             // btnUrunSil
             // 
-            this.btnUrunSil.Location = new System.Drawing.Point(611, 331);
+            this.btnUrunSil.Location = new System.Drawing.Point(826, 60);
             this.btnUrunSil.Name = "btnUrunSil";
             this.btnUrunSil.Size = new System.Drawing.Size(75, 23);
             this.btnUrunSil.TabIndex = 7;
@@ -94,7 +101,7 @@
             // 
             // txUrunSil
             // 
-            this.txUrunSil.Location = new System.Drawing.Point(437, 331);
+            this.txUrunSil.Location = new System.Drawing.Point(745, 27);
             this.txUrunSil.Name = "txUrunSil";
             this.txUrunSil.Size = new System.Drawing.Size(156, 22);
             this.txUrunSil.TabIndex = 6;
@@ -134,7 +141,7 @@
             // 
             // btnUrunEkle
             // 
-            this.btnUrunEkle.Location = new System.Drawing.Point(611, 60);
+            this.btnUrunEkle.Location = new System.Drawing.Point(518, 101);
             this.btnUrunEkle.Name = "btnUrunEkle";
             this.btnUrunEkle.Size = new System.Drawing.Size(75, 23);
             this.btnUrunEkle.TabIndex = 1;
@@ -185,6 +192,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.dataGridView2);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -207,6 +215,35 @@
             // 
             this.menuItemsTableAdapter.ClearBeforeFill = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(646, 30);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(93, 16);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Silinecek Ürün";
+            // 
+            // btnUrunleriYenile
+            // 
+            this.btnUrunleriYenile.Location = new System.Drawing.Point(347, 376);
+            this.btnUrunleriYenile.Name = "btnUrunleriYenile";
+            this.btnUrunleriYenile.Size = new System.Drawing.Size(141, 23);
+            this.btnUrunleriYenile.TabIndex = 9;
+            this.btnUrunleriYenile.Text = "Ürünleri Yenile";
+            this.btnUrunleriYenile.UseVisualStyleBackColor = true;
+            this.btnUrunleriYenile.Click += new System.EventHandler(this.btnUrunleriYenile_Click);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(6, 6);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersWidth = 51;
+            this.dataGridView2.RowTemplate.Height = 24;
+            this.dataGridView2.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView2.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -222,6 +259,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuItemsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bIL215_ProjeDataSet)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -245,6 +284,9 @@
         private System.Windows.Forms.TextBox txUrunFiyati;
         private System.Windows.Forms.Button btnUrunSil;
         private System.Windows.Forms.TextBox txUrunSil;
+        private System.Windows.Forms.Button btnUrunleriYenile;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridView dataGridView2;
     }
 }
 
