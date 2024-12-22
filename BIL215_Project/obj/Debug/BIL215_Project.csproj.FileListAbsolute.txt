@@ -2,9 +2,9 @@ C:\Users\Eren\source\repos\BIL215_Project\BIL215_Project\bin\Debug\BIL215_Projec
 C:\Users\Eren\source\repos\BIL215_Project\BIL215_Project\bin\Debug\BIL215_Project.exe
 C:\Users\Eren\source\repos\BIL215_Project\BIL215_Project\bin\Debug\BIL215_Project.pdb
 C:\Users\Eren\source\repos\BIL215_Project\BIL215_Project\obj\Debug\BIL215_Project.csproj.AssemblyReference.cache
-C:\Users\Eren\source\repos\BIL215_Project\BIL215_Project\obj\Debug\BIL215_Project.Form1.resources
 C:\Users\Eren\source\repos\BIL215_Project\BIL215_Project\obj\Debug\BIL215_Project.Properties.Resources.resources
 C:\Users\Eren\source\repos\BIL215_Project\BIL215_Project\obj\Debug\BIL215_Project.csproj.GenerateResource.cache
 C:\Users\Eren\source\repos\BIL215_Project\BIL215_Project\obj\Debug\BIL215_Project.csproj.CoreCompileInputs.cache
 C:\Users\Eren\source\repos\BIL215_Project\BIL215_Project\obj\Debug\BIL215_Project.exe
 C:\Users\Eren\source\repos\BIL215_Project\BIL215_Project\obj\Debug\BIL215_Project.pdb
+C:\Users\Eren\source\repos\BIL215_Project\BIL215_Project\obj\Debug\BIL215_Project.Form1.resources
