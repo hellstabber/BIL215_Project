@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClosedXML.Excel;
 
 
 
@@ -17,6 +18,7 @@ namespace BIL215_Project
     public partial class Form1 : Form
     {
         private Dictionary<int, string> menuItemsDictionary = new Dictionary<int, string>();
+
         public Form1()
         {
             InitializeComponent();
@@ -32,7 +34,11 @@ namespace BIL215_Project
             tabControl1.TabPages[0].Text = "Ürünler";
             tabControl1.TabPages[1].Text = "Rezervasyon";
             tabControl1.TabPages[2].Text = "Adisyonlar";
+            tabControl1.TabPages[3].Text = "Yedekleme";
         }
+
+
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -100,14 +106,16 @@ namespace BIL215_Project
 
         private void btnRezervasyonEkle_Click(object sender, EventArgs e)
         {
-            string connectionString = "Server=LAPTOP\\SQLEXPRESS;Database=BIL215_Proje;Trusted_Connection=True;"; // Replace with your actual database name
+            string connectionString =
+                "Server=LAPTOP\\SQLEXPRESS;Database=BIL215_Proje;Trusted_Connection=True;"; // Replace with your actual database name
             string customerName = txRezervasyonMusteriIsmi.Text;
             DateTime reservationDate = DateTime.Parse(txRezervasyonMusteriTarih.Text);
             int numberOfGuests = int.Parse(txRezervasyonKisiSayisi.Text);
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "INSERT INTO Reservations (CustomerName, ReservationDate, NumberOfGuests) VALUES (@CustomerName, @ReservationDate, @NumberOfGuests)";
+                string query =
+                    "INSERT INTO Reservations (CustomerName, ReservationDate, NumberOfGuests) VALUES (@CustomerName, @ReservationDate, @NumberOfGuests)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@CustomerName", customerName);
@@ -192,7 +200,7 @@ namespace BIL215_Project
 
         private void label8_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void PopulateAdisyonListesi()
@@ -215,6 +223,7 @@ namespace BIL215_Project
                             clAdisyonListesi.Items.Add(itemName);
                         }
                     }
+
                     connection.Close();
                 }
             }
@@ -232,7 +241,8 @@ namespace BIL215_Project
                 {
                     string itemName = item.ToString();
                     int menuItemID = menuItemsDictionary.FirstOrDefault(x => x.Value == itemName).Key;
-                    string query = "INSERT INTO OrderDetails (OrderID, MenuItemID, Quantity, Price) VALUES (@OrderID, @MenuItemID, @Quantity, (SELECT BasePrice FROM MenuItems WHERE MenuItemID = @MenuItemID))";
+                    string query =
+                        "INSERT INTO OrderDetails (OrderID, MenuItemID, Quantity, Price) VALUES (@OrderID, @MenuItemID, @Quantity, (SELECT BasePrice FROM MenuItems WHERE MenuItemID = @MenuItemID))";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@OrderID", reservationID);
@@ -259,6 +269,7 @@ namespace BIL215_Project
                 connection.Close();
             }
         }
+
         private object CreateMenuItem(int menuItemID, string itemName)
         {
             return new
@@ -313,6 +324,66 @@ namespace BIL215_Project
             }
 
             MessageBox.Show("Adisyon başarıyla silindi.");
+        }
+
+        private void btnYedekAl_Click(object sender, EventArgs e)
+        {
+            string connectionString = "Server=LAPTOP\\SQLEXPRESS;Database=BIL215_Proje;Trusted_Connection=True;";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                using (var workbook = new XLWorkbook())
+                {
+                    // Export MenuItems table
+                    var menuItemsTable = new DataTable();
+                    using (var command = new SqlCommand("SELECT * FROM MenuItems", connection))
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(menuItemsTable);
+                    }
+
+                    var menuItemsSheet = workbook.Worksheets.Add(menuItemsTable, "MenuItems");
+
+                    // Export Reservations table
+                    var reservationsTable = new DataTable();
+                    using (var command = new SqlCommand("SELECT * FROM Reservations", connection))
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(reservationsTable);
+                    }
+
+                    var reservationsSheet = workbook.Worksheets.Add(reservationsTable, "Reservations");
+
+                    // Export Orders table
+                    var ordersTable = new DataTable();
+                    using (var command = new SqlCommand("SELECT * FROM Orders", connection))
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(ordersTable);
+                    }
+
+                    var ordersSheet = workbook.Worksheets.Add(ordersTable, "Orders");
+
+                    // Export OrderDetails table
+                    var orderDetailsTable = new DataTable();
+                    using (var command = new SqlCommand("SELECT * FROM OrderDetails", connection))
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(orderDetailsTable);
+                    }
+
+                    var orderDetailsSheet = workbook.Worksheets.Add(orderDetailsTable, "OrderDetails");
+
+                    // Save the workbook
+                    string filePath = "DatabaseExport.xlsx";
+                    workbook.SaveAs(filePath);
+
+                    MessageBox.Show("Veritabanı başarıyla Excel dosyasına aktarıldı: " + filePath);
+                }
+
+                connection.Close();
+            }
         }
     }
 }
